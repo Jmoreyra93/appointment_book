@@ -25,8 +25,23 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: 7,
         required: true,
-    }
-
+    },
+    isProfessional: {
+        type: Boolean,
+        default: false,
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+    seenNotifications: {
+        type: Array,
+        default: [],
+    },
+    unseenNotifications: {
+        type: Array,
+        default: [],
+    },
 },
     { timestamps: true }
 )
