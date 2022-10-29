@@ -4,6 +4,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const authMiddleware = require("../middlewares/authMiddleware");
+const Proffesional = require('../models/doctorModel');
 
 router.post("/register", async (req, res) => {
     try {
@@ -70,6 +71,37 @@ router.post("/get-user-info-by-id", authMiddleware, async (req, res) => {
         res
             .status(500)
             .send({ message: "Error getting user info", success: false, error });
+    }
+});
+
+router.post("/apply-professional-account", authMiddleware, async (req, res) => {
+    try {
+        const newprofessional = new Proffesional({ ...req.body, status: "pending" });
+        await newprofessional.save();
+        const adminUser = await User.findOne({ isAdmin: true });
+
+        const unseenNotifications = adminUser.unseenNotifications;
+        unseenNotifications.push({
+            type: "new-professional-request",
+            message: `${newprofessional.firstName} ${newprofessional.lastName} has applied for a professional account`,
+            data: {
+                professionalId: newprofessional._id,
+                name: newprofessional.firstName + " " + newprofessional.lastName,
+            },
+            onClickPath: "/admin/professionals",
+        });
+        await User.findByIdAndUpdate(adminUser._id, { unseenNotifications });
+        res.status(200).send({
+            success: true,
+            message: "Professional account applied successfully",
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Error applying professional account",
+            success: false,
+            error,
+        });
     }
 });
 

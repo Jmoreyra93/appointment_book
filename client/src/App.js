@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import { useSelector } from 'react-redux';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
+import ApplyProfessional from './pages/ApplyProfessional';
 
 function App() {
   const { loading } = useSelector(state => state.alerts)
@@ -39,6 +40,11 @@ function App() {
           <PublicRoute>
             <Register />
           </PublicRoute>} />
+        <Route 
+          path='/apply-professional' 
+          element={
+            <ApplyProfessional />
+          } />
       </Routes>
     </BrowserRouter>
   );
