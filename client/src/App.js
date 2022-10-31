@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
 import ApplyProfessional from './pages/ApplyProfessional';
+import Notifications from './pages/Notifications';
 
 function App() {
   const { loading } = useSelector(state => state.alerts)
@@ -22,28 +23,37 @@ function App() {
       <Toaster position="top-center" reverseOrder={false} />
 
       <Routes>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>} />
-        <Route 
-          path='/login' 
+        <Route
+          path='/login'
           element={
-          <PublicRoute>
-            <Login />
-          </PublicRoute>} />
-        <Route 
-          path='/register' 
+            <PublicRoute>
+              <Login />
+            </PublicRoute>} />
+        <Route
+          path='/register'
           element={
-          <PublicRoute>
-            <Register />
-          </PublicRoute>} />
-        <Route 
-          path='/apply-professional' 
+            <PublicRoute>
+              <Register />
+            </PublicRoute>} />
+        <Route
+          path='/apply-professional'
           element={
-            <ApplyProfessional />
+            <ProtectedRoute>
+              <ApplyProfessional />
+            </ProtectedRoute>
+          } />
+        <Route
+          path='/notifications'
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
           } />
       </Routes>
     </BrowserRouter>
