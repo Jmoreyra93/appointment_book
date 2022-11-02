@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const authMiddleware = require("../middlewares/authMiddleware");
-const Proffesional = require('../models/doctorModel');
+const Proffesional = require('../models/professionalModel');
 
 router.post("/register", async (req, res) => {
     try {
@@ -126,7 +126,7 @@ router.post(
         } catch (error) {
             console.log(error);
             res.status(500).send({
-                message: "Error applying doctor account",
+                message: "Error applying professional account",
                 success: false,
                 error,
             });
@@ -149,7 +149,7 @@ router.post("/delete-all-notifications", authMiddleware, async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).send({
-            message: "Error applying doctor account",
+            message: "Error applying professional account",
             success: false,
             error,
         });

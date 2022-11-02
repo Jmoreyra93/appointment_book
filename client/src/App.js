@@ -9,6 +9,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
 import ApplyProfessional from './pages/ApplyProfessional';
 import Notifications from './pages/Notifications';
+import Userslist from './pages/Admin/Userslist';
+import ProfessionalsList from './pages/Admin/ProfessionalsList';
 
 function App() {
   const { loading } = useSelector(state => state.alerts)
@@ -55,6 +57,23 @@ function App() {
               <Notifications />
             </ProtectedRoute>
           } />
+        <Route
+          path="/admin/userslist"
+          element={
+            <ProtectedRoute>
+              <Userslist />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/professionalslist"
+          element={
+            <ProtectedRoute>
+              <ProfessionalsList />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

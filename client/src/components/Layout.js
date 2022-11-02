@@ -46,7 +46,7 @@ function Layout({ children }) {
         },
         {
             name: "Professional",
-            path: "/admin/professionallist",
+            path: "/admin/professionalslist",
             icon: "ri-brush-fill",
         },
         {
@@ -55,6 +55,25 @@ function Layout({ children }) {
             icon: "ri-user-line",
         },
     ];
+
+    // const doctorMenu = [
+    //     {
+    //         name: "Home",
+    //         path: "/",
+    //         icon: "ri-home-line",
+    //     },
+    //     {
+    //         name: "Appointments",
+    //         path: "/doctor/appointments",
+    //         icon: "ri-file-list-line",
+    //     },
+    //     {
+    //         name: "Profile",
+    //         path: `/doctor/profile/${user?._id}`,
+    //         icon: "ri-user-line",
+    //     },
+    // ];
+
     const menuToBeRendered = user?.isAdmin ? adminMenu : userMenu;
 
     return (
